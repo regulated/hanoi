@@ -6,10 +6,8 @@ type DiskProps = {
 };
 
 const Disk = ({ did }: DiskProps) => {
-  let height: string = "";
-
   return (
-    <section>
+    <>
       {(() => {
         switch (did) {
           case 0:
@@ -24,7 +22,7 @@ const Disk = ({ did }: DiskProps) => {
             return;
         }
       })()}
-    </section>
+    </>
   );
 };
 
