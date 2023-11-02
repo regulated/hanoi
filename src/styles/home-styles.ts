@@ -1,6 +1,6 @@
 // default index.tsx styles
 export const appContainer =
-  "container bg-indigo-950 flex flex-col items-center justify-center min-h-screen min-w-full";
+  "container bg-zinc-800 flex flex-col items-center justify-center min-h-screen min-w-full";
 export const title =
   "text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-400";
 export const purple = "text-purple-300";

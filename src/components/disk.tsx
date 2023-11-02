@@ -21,25 +21,25 @@ const Disk = ({ did }: DiskProps) => {
           case 0:
             return <div className={blankOval}></div>;
           case 1:
-            return <div className={redOval}>Disk {did}</div>;
+            return <div className={redOval}></div>;
           case 2:
-            return <div className={orangeOval}>Disk {did}</div>;
+            return <div className={orangeOval}></div>;
           case 3:
-            return <div className={yellowOval}>Disk {did}</div>;
+            return <div className={yellowOval}></div>;
           case 4:
-            return <div className={greenOval}>Disk {did}</div>;
+            return <div className={greenOval}></div>;
           case 5:
-            return <div className={blueOval}>Disk {did}</div>;
+            return <div className={blueOval}></div>;
           case 6:
-            return <div className={purpleOval}>Disk {did}</div>;
+            return <div className={purpleOval}></div>;
           case 7:
-            return <div className={purpleOval}>Disk {did}</div>;
+            return <div className={purpleOval}></div>;
           case 8:
-            return <div className={purpleOval}>Disk {did}</div>;
+            return <div className={purpleOval}></div>;
           case 9:
-            return <div className={purpleOval}>Disk {did}</div>;
+            return <div className={purpleOval}></div>;
           case 10:
-            return <div className={purpleOval}>Disk {did}</div>;
+            return <div className={purpleOval}></div>;
           default:
             return;
         }

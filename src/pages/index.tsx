@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   appContainer,
   title,
@@ -9,11 +9,13 @@ import Pillar from "../components/pillar";
 
 export default function Home() {
   // number of disks used
-  const size: number = 7;
+  const size: number = 6;
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
   const [stackC, setStackC] = useState<number[]>([]);
+
+  const [interrupt, setInterrupt] = useState<boolean>(false);
 
   let tempA: number[] = [];
   let tempB: number[] = [];
@@ -29,7 +31,7 @@ export default function Home() {
   // load initial disks at start
   useEffect(() => {
     reset();
-  }, []);
+  }, [interrupt]);
 
   const reset = () => {
     setStackA(tempA);
@@ -38,12 +40,17 @@ export default function Home() {
   };
 
   const handleSolve = async () => {
-    await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
+    await recursiveSolve(
+      [...stackA, 1],
+      [...stackC, 3],
+      [...stackB, 2],
+      size,
+      interrupt,
+    );
   };
 
   const delay = (ms: number) => {
     return new Promise((resolve) => {
-      console.log("waiting...");
       setTimeout(resolve, ms);
     });
   };
@@ -53,10 +60,11 @@ export default function Home() {
     b: number[],
     c: number[],
     n: number,
+    interrupt: boolean,
   ) => {
-    if (n == 0) return;
+    if (n == 0 || interrupt) return;
 
-    await recursiveSolve(a, c, b, n - 1);
+    await recursiveSolve(a, c, b, n - 1, interrupt);
 
     for (let i = a.length - 2; i >= 0; i--) {
       if (a[i] != 0) {
@@ -108,7 +116,8 @@ export default function Home() {
       }
     }
 
-    await recursiveSolve(c, b, a, n - 1);
+    if (interrupt) return;
+    await recursiveSolve(c, b, a, n - 1, interrupt);
   };
 
   return (
@@ -130,6 +139,7 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-gray-300 px-2"
           onClick={() => {
+            setInterrupt(false);
             handleSolve();
           }}
         >
@@ -138,6 +148,7 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-red-600 px-2"
           onClick={() => {
+            setInterrupt(true);
             reset();
           }}
         >

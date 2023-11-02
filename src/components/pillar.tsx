@@ -10,7 +10,6 @@ const Pillar = ({ pid, disks }: PillarProps) => {
   return (
     <>
       <div className={rectangle}>
-        P {pid}
         <Disk did={disks[9]} />
         <Disk did={disks[8]} />
         <Disk did={disks[7]} />
