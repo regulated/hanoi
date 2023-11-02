@@ -1,4 +1,10 @@
-import { redOval, blueOval, yellowOval, greenOval, blankOval } from "../styles/disk-style";
+import {
+  redOval,
+  blueOval,
+  yellowOval,
+  greenOval,
+  blankOval,
+} from "../styles/disk-style";
 
 type DiskProps = {
   did: number;
@@ -19,6 +25,18 @@ const Disk = ({ did }: DiskProps) => {
           case 3:
             return <div className={yellowOval}>Disk {did}</div>;
           case 4:
+            return <div className={greenOval}>Disk {did}</div>;
+          case 5:
+            return <div className={greenOval}>Disk {did}</div>;
+          case 6:
+            return <div className={greenOval}>Disk {did}</div>;
+          case 7:
+            return <div className={greenOval}>Disk {did}</div>;
+          case 8:
+            return <div className={greenOval}>Disk {did}</div>;
+          case 9:
+            return <div className={greenOval}>Disk {did}</div>;
+          case 10:
             return <div className={greenOval}>Disk {did}</div>;
           default:
             return;

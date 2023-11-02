@@ -113,39 +113,37 @@ export default function Home() {
 
   return (
     <>
-      <html className="bg-indigo-950">
-        <Head>
-          <title>Towers of Hanoi</title>
-          <meta name="description" content="Towers of Hanoi" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main className={appContainer}>
-          <h1 className={title}>
-            Towers of <span className="text-[hsl(280,100%,70%)]">Hanoi</span>
-          </h1>
-          <div className={grid}>
-            <Pillar id={1} disks={stackA} />
-            <Pillar id={2} disks={stackB} />
-            <Pillar id={3} disks={stackC} />
-          </div>
-          <button
-            className="my-2 rounded-lg bg-gray-300 px-2"
-            onClick={() => {
-              handleSolve();
-            }}
-          >
-            Solve
-          </button>
-          <button
-            className="my-2 rounded-lg bg-red-600 px-2"
-            onClick={() => {
-              reset();
-            }}
-          >
-            Reset
-          </button>
-        </main>
-      </html>
+      <Head>
+        <title>Towers of Hanoi</title>
+        <meta name="description" content="Towers of Hanoi" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={appContainer}>
+        <h1 className={title}>
+          Towers of <span className="text-[hsl(280,100%,70%)]">Hanoi</span>
+        </h1>
+        <div className={grid}>
+          <Pillar id={1} disks={stackA} />
+          <Pillar id={2} disks={stackB} />
+          <Pillar id={3} disks={stackC} />
+        </div>
+        <button
+          className="my-2 rounded-lg bg-gray-300 px-2"
+          onClick={() => {
+            handleSolve();
+          }}
+        >
+          Solve
+        </button>
+        <button
+          className="my-2 rounded-lg bg-red-600 px-2"
+          onClick={() => {
+            reset();
+          }}
+        >
+          Reset
+        </button>
+      </main>
     </>
   );
 }
