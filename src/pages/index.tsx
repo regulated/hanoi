@@ -11,11 +11,12 @@ export default function Home() {
   // number of disks used
   const size: number = 6;
 
+  const ac = new AbortController();
+  const signal = ac.signal;
+
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
   const [stackC, setStackC] = useState<number[]>([]);
-
-  const [interrupt, setInterrupt] = useState<boolean>(false);
 
   let tempA: number[] = [];
   let tempB: number[] = [];
@@ -31,7 +32,7 @@ export default function Home() {
   // load initial disks at start
   useEffect(() => {
     reset();
-  }, [interrupt]);
+  });
 
   const reset = () => {
     setStackA(tempA);
@@ -45,7 +46,7 @@ export default function Home() {
       [...stackC, 3],
       [...stackB, 2],
       size,
-      interrupt,
+      signal,
     );
   };
 
@@ -55,16 +56,29 @@ export default function Home() {
     });
   };
 
+  // const recursiveSolveWrap = async (
+  //   a: number[],
+  //   b: number[],
+  //   c: number[],
+  //   n: number,
+  // ) => {
+  //   try {
+  //     await recursiveSolve(a, b, c, n);
+  //   } catch (e) {
+  //     if (e.name !== "AbortError") throw e;
+  //   }
+  // };
+
   const recursiveSolve = async (
     a: number[],
     b: number[],
     c: number[],
     n: number,
-    interrupt: boolean,
+    s,
   ) => {
-    if (n == 0 || interrupt) return;
+    if (n == 0) return;
 
-    await recursiveSolve(a, c, b, n - 1, interrupt);
+    await recursiveSolve(a, c, b, n - 1, s);
 
     for (let i = a.length - 2; i >= 0; i--) {
       if (a[i] != 0) {
@@ -116,8 +130,7 @@ export default function Home() {
       }
     }
 
-    if (interrupt) return;
-    await recursiveSolve(c, b, a, n - 1, interrupt);
+    await recursiveSolve(c, b, a, n - 1, s);
   };
 
   return (
@@ -139,7 +152,6 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-gray-300 px-2"
           onClick={() => {
-            setInterrupt(false);
             handleSolve();
           }}
         >
@@ -148,7 +160,7 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-red-600 px-2"
           onClick={() => {
-            setInterrupt(true);
+            ac.abort();
             reset();
           }}
         >
