@@ -9,7 +9,7 @@ import Pillar from "../components/pillar";
 
 export default function Home() {
   // number of disks used
-  const size: number = 6;
+  const size: number = 7;
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
