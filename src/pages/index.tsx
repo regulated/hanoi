@@ -1,41 +1,43 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   appContainer,
-  /*title, purple, body,*/ grid,
+  title,
+  /* purple, body,*/ grid,
 } from "../styles/home-styles";
 import Pillar from "../components/pillar";
 //import Disk from "../components/disk";
 //import Solve from "../algo/solve";
 
-	let initialized = false;
-
 export default function Home() {
-
-	const size: number = 4;
+  // number of disks used
+  const size: number = 4;
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
   const [stackC, setStackC] = useState<number[]>([]);
 
-	let tempA: number[] = [];
-	let tempB: number[] = [];
-	let tempC: number[] = [];
+  let tempA: number[] = [];
+  let tempB: number[] = [];
+  let tempC: number[] = [];
 
-	for (let i = 0; i < size; i++) {
-		tempA = [...tempA, i + 1];
-		tempB = [...tempB, 0];
-		tempC = [...tempC, 0];
-	}
+  // dynamically add disks based on size
+  for (let i = 0; i < size; i++) {
+    tempA = [...tempA, i + 1];
+    tempB = [...tempB, 0];
+    tempC = [...tempC, 0];
+  }
 
+  // load initial disks at start
+  useEffect(() => {
+    reset();
+  }, []);
 
-	if (!initialized) {
-		initialized = true;
-		setStackA(tempA);
-		setStackB(tempB);
-		setStackC(tempC);
-		console.log(stackA, stackB, stackC);
-	}
+  const reset = () => {
+    setStackA(tempA);
+    setStackB(tempB);
+    setStackC(tempC);
+  };
 
   const handleSolve = async () => {
     await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
@@ -62,7 +64,6 @@ export default function Home() {
       if (a[i] != 0) {
         for (let j = 0; j < b.length - 1; j++) {
           if (b[j] == 0) {
-
             b[j] = a[i];
             a[i] = 0;
 
@@ -112,7 +113,6 @@ export default function Home() {
     await recursiveSolve(c, b, a, n - 1);
   };
 
-
   return (
     <>
       <html className="bg-indigo-950">
@@ -122,11 +122,9 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className={appContainer}>
-          {/*
-        <h1 className={title}>
-          Towers of <span className="text-[hsl(280,100%,70%)]">Hanoi</span>
-        </h1>
-				*/}
+          <h1 className={title}>
+            Towers of <span className="text-[hsl(280,100%,70%)]">Hanoi</span>
+          </h1>
           <div className={grid}>
             <Pillar id={1} disks={stackA} />
             <Pillar id={2} disks={stackB} />
@@ -143,9 +141,10 @@ export default function Home() {
           <button
             className="my-2 rounded-lg bg-red-600 px-2"
             onClick={() => {
-              setStackA([1, 2, 3, 4]);
-              setStackB([0, 0, 0, 0]);
-              setStackC([0, 0, 0, 0]);
+              reset();
+              // setStackA([1, 2, 3, 4]);
+              // setStackB([0, 0, 0, 0]);
+              // setStackC([0, 0, 0, 0]);
             }}
           >
             Reset
