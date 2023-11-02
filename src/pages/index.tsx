@@ -6,8 +6,6 @@ import {
   /* purple, body,*/ grid,
 } from "../styles/home-styles";
 import Pillar from "../components/pillar";
-//import Disk from "../components/disk";
-//import Solve from "../algo/solve";
 
 export default function Home() {
   // number of disks used
@@ -142,9 +140,6 @@ export default function Home() {
             className="my-2 rounded-lg bg-red-600 px-2"
             onClick={() => {
               reset();
-              // setStackA([1, 2, 3, 4]);
-              // setStackB([0, 0, 0, 0]);
-              // setStackC([0, 0, 0, 0]);
             }}
           >
             Reset
