@@ -4,6 +4,7 @@ import {
   yellowOval,
   greenOval,
   blueOval,
+	indigoOval,
   purpleOval,
   blankOval,
 } from "../styles/disk-style";
@@ -31,7 +32,7 @@ const Disk = ({ did }: DiskProps) => {
           case 5:
             return <div className={blueOval}></div>;
           case 6:
-            return <div className={purpleOval}></div>;
+            return <div className={indigoOval}></div>;
           case 7:
             return <div className={purpleOval}></div>;
           case 8:

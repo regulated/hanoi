@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   appContainer,
   title,
@@ -9,10 +9,9 @@ import Pillar from "../components/pillar";
 
 export default function Home() {
   // number of disks used
-  const size: number = 6;
+  const size: number = 7;
 
-  const ac = new AbortController();
-  const signal = ac.signal;
+	let cancel = useRef(false);
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
@@ -32,7 +31,7 @@ export default function Home() {
   // load initial disks at start
   useEffect(() => {
     reset();
-  });
+  }, []);
 
   const reset = () => {
     setStackA(tempA);
@@ -46,7 +45,6 @@ export default function Home() {
       [...stackC, 3],
       [...stackB, 2],
       size,
-      signal,
     );
   };
 
@@ -56,30 +54,17 @@ export default function Home() {
     });
   };
 
-  // const recursiveSolveWrap = async (
-  //   a: number[],
-  //   b: number[],
-  //   c: number[],
-  //   n: number,
-  // ) => {
-  //   try {
-  //     await recursiveSolve(a, b, c, n);
-  //   } catch (e) {
-  //     if (e.name !== "AbortError") throw e;
-  //   }
-  // };
-
   const recursiveSolve = async (
     a: number[],
     b: number[],
     c: number[],
     n: number,
-    s,
   ) => {
     if (n == 0) return;
 
-    await recursiveSolve(a, c, b, n - 1, s);
+    await recursiveSolve(a, c, b, n - 1);
 
+		if (!cancel.current) {
     for (let i = a.length - 2; i >= 0; i--) {
       if (a[i] != 0) {
         for (let j = 0; j < b.length - 1; j++) {
@@ -89,6 +74,7 @@ export default function Home() {
 
             await delay(200);
 
+						if (!cancel.current) {
             switch (a[size]) {
               case 1:
                 setStackA(a.slice(0, size));
@@ -122,6 +108,7 @@ export default function Home() {
                 setStackC(c.slice(0, size));
                 break;
             }
+						}
 
             break;
           }
@@ -129,8 +116,9 @@ export default function Home() {
         break;
       }
     }
+		}
 
-    await recursiveSolve(c, b, a, n - 1, s);
+    await recursiveSolve(c, b, a, n - 1);
   };
 
   return (
@@ -152,6 +140,7 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-gray-300 px-2"
           onClick={() => {
+						cancel.current = false;
             handleSolve();
           }}
         >
@@ -160,7 +149,8 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-red-600 px-2"
           onClick={() => {
-            ac.abort();
+            //ac.abort();
+						cancel.current = true;
             reset();
           }}
         >
