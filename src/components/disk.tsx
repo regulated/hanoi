@@ -4,14 +4,13 @@ import {
   yellowOval,
   greenOval,
   blueOval,
-	indigoOval,
+  indigoOval,
   purpleOval,
   blankOval,
 } from "../styles/disk-style";
 
 type DiskProps = {
-  did: number;
-  h: number;
+  did: number | undefined;
 };
 
 const Disk = ({ did }: DiskProps) => {
@@ -42,7 +41,7 @@ const Disk = ({ did }: DiskProps) => {
           case 10:
             return <div className={purpleOval}></div>;
           default:
-            return;
+            return <div className={blankOval}></div>;
         }
       })()}
     </>
