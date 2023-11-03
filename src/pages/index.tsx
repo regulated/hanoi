@@ -55,7 +55,7 @@ export default function Home() {
     c: number[],
     n: number,
   ) => {
-    if (n == 0) return;
+    if (n == 0 || cancel.current) return;
 
     await recursiveSolve(a, c, b, n - 1);
 
@@ -66,8 +66,6 @@ export default function Home() {
             if (b[j] == 0) {
               b[j] = a[i];
               a[i] = 0;
-
-              await delay(200);
 
               if (!cancel.current) {
                 switch (a[size]) {
@@ -104,6 +102,7 @@ export default function Home() {
                     break;
                 }
               }
+              await delay(200);
 
               break;
             }
@@ -144,7 +143,6 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-red-600 px-2"
           onClick={() => {
-            //ac.abort();
             cancel.current = true;
             reset();
           }}
