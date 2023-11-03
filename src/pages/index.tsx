@@ -43,10 +43,10 @@ export default function Home() {
     await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
   };
 
-  const delay = (ms: number) => {
+  const delay = async (ms: number) => {
     return new Promise((resolve) => {
       setTimeout(resolve, ms);
-    });
+    }).then(() => console.log("waiting"));
   };
 
   const recursiveSolve = async (
