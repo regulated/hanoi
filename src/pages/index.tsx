@@ -11,7 +11,7 @@ export default function Home() {
   // number of disks used
   const size: number = 7;
 
-	let cancel = useRef(false);
+  let cancel = useRef(false);
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
@@ -40,12 +40,7 @@ export default function Home() {
   };
 
   const handleSolve = async () => {
-    await recursiveSolve(
-      [...stackA, 1],
-      [...stackC, 3],
-      [...stackB, 2],
-      size,
-    );
+    await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
   };
 
   const delay = (ms: number) => {
@@ -64,59 +59,59 @@ export default function Home() {
 
     await recursiveSolve(a, c, b, n - 1);
 
-		if (!cancel.current) {
-    for (let i = a.length - 2; i >= 0; i--) {
-      if (a[i] != 0) {
-        for (let j = 0; j < b.length - 1; j++) {
-          if (b[j] == 0) {
-            b[j] = a[i];
-            a[i] = 0;
+    if (!cancel.current) {
+      for (let i = a.length - 2; i >= 0; i--) {
+        if (a[i] != 0) {
+          for (let j = 0; j < b.length - 1; j++) {
+            if (b[j] == 0) {
+              b[j] = a[i];
+              a[i] = 0;
 
-            await delay(200);
+              await delay(200);
 
-						if (!cancel.current) {
-            switch (a[size]) {
-              case 1:
-                setStackA(a.slice(0, size));
-                break;
-              case 2:
-                setStackB(a.slice(0, size));
-                break;
-              case 3:
-                setStackC(a.slice(0, size));
-                break;
-            }
-            switch (b[size]) {
-              case 1:
-                setStackA(b.slice(0, size));
-                break;
-              case 2:
-                setStackB(b.slice(0, size));
-                break;
-              case 3:
-                setStackC(b.slice(0, size));
-                break;
-            }
-            switch (c[size]) {
-              case 1:
-                setStackA(c.slice(0, size));
-                break;
-              case 2:
-                setStackB(c.slice(0, size));
-                break;
-              case 3:
-                setStackC(c.slice(0, size));
-                break;
-            }
-						}
+              if (!cancel.current) {
+                switch (a[size]) {
+                  case 1:
+                    setStackA(a.slice(0, size));
+                    break;
+                  case 2:
+                    setStackB(a.slice(0, size));
+                    break;
+                  case 3:
+                    setStackC(a.slice(0, size));
+                    break;
+                }
+                switch (b[size]) {
+                  case 1:
+                    setStackA(b.slice(0, size));
+                    break;
+                  case 2:
+                    setStackB(b.slice(0, size));
+                    break;
+                  case 3:
+                    setStackC(b.slice(0, size));
+                    break;
+                }
+                switch (c[size]) {
+                  case 1:
+                    setStackA(c.slice(0, size));
+                    break;
+                  case 2:
+                    setStackB(c.slice(0, size));
+                    break;
+                  case 3:
+                    setStackC(c.slice(0, size));
+                    break;
+                }
+              }
 
-            break;
+              break;
+            }
           }
+          break;
         }
-        break;
       }
     }
-		}
 
     await recursiveSolve(c, b, a, n - 1);
   };
@@ -140,7 +135,7 @@ export default function Home() {
         <button
           className="my-2 rounded-lg bg-gray-300 px-2"
           onClick={() => {
-						cancel.current = false;
+            cancel.current = false;
             handleSolve();
           }}
         >
@@ -150,7 +145,7 @@ export default function Home() {
           className="my-2 rounded-lg bg-red-600 px-2"
           onClick={() => {
             //ac.abort();
-						cancel.current = true;
+            cancel.current = true;
             reset();
           }}
         >
