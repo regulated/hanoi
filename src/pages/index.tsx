@@ -146,7 +146,7 @@ export default function Home() {
           <Pillar disks={stackB} />
           <Pillar disks={stackC} />
         </div>
-        <div className="grid grid-cols-2 grid-rows-2 gap-4">
+        <div className="align-center grid grid-cols-2 grid-rows-2 justify-center gap-6">
           <button
             className="my-2 rounded-lg bg-gray-300 px-2"
             onClick={() => {
@@ -165,7 +165,9 @@ export default function Home() {
           >
             Reset
           </button>
-          <label className="text-xl text-gray-200">Disks:</label>
+          <label className="my-2 flex justify-end text-xl text-gray-200">
+            Disks:
+          </label>
           <input
             className={input}
             type="number"
