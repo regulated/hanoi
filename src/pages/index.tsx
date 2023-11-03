@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, ChangeEvent } from "react";
 import {
   appContainer,
   title,
+  input,
   /* purple, body,*/ grid,
 } from "../styles/home-styles";
 import Pillar from "../components/pillar";
@@ -12,12 +13,6 @@ export default function Home() {
   //const size = useRef(7);
 
   const [size, setSize] = useState<number>(7);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSize(Number(e.target.value));
-    cancel.current = true;
-    reset();
-  };
 
   const cancel = useRef(false);
 
@@ -42,10 +37,16 @@ export default function Home() {
     setStackC(tempC);
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSize(Number(e.target.value));
+    cancel.current = true;
+    reset();
+  };
+
   // load initial disks at start
   useEffect(() => {
     reset();
-  }, []);
+  }, [size]);
 
   const handleSolve = async () => {
     await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
@@ -145,25 +146,33 @@ export default function Home() {
           <Pillar disks={stackB} />
           <Pillar disks={stackC} />
         </div>
-        <button
-          className="my-2 rounded-lg bg-gray-300 px-2"
-          onClick={() => {
-            cancel.current = false;
-            handleSolve();
-          }}
-        >
-          Solve
-        </button>
-        <button
-          className="my-2 rounded-lg bg-red-600 px-2"
-          onClick={() => {
-            cancel.current = true;
-            reset();
-          }}
-        >
-          Reset
-        </button>
-        <input type="number" onChange={handleChange} value={size} />
+        <div className="grid grid-cols-2 grid-rows-2 gap-4">
+          <button
+            className="my-2 rounded-lg bg-gray-300 px-2"
+            onClick={() => {
+              cancel.current = false;
+              handleSolve();
+            }}
+          >
+            Solve
+          </button>
+          <button
+            className="my-2 rounded-lg bg-red-600 px-2"
+            onClick={() => {
+              cancel.current = true;
+              reset();
+            }}
+          >
+            Reset
+          </button>
+          <h2 className="text-xl font-bold text-gray-200">Disks:</h2>
+          <input
+            className={input}
+            type="number"
+            onChange={handleChange}
+            value={size}
+          />
+        </div>
       </main>
     </>
   );
