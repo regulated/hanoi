@@ -2,11 +2,10 @@ import { rectangle } from "../styles/pillar-style";
 import Disk from "./disk";
 
 type PillarProps = {
-  pid: number;
   disks: number[];
 };
 
-const Pillar = ({ pid, disks }: PillarProps) => {
+const Pillar = ({ disks }: PillarProps) => {
   return (
     <>
       <div className={rectangle}>

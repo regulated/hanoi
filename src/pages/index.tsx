@@ -50,21 +50,26 @@ export default function Home() {
   };
 
   const recursiveSolve = async (
-    a: number[],
-    b: number[],
-    c: number[],
+    a: number[] | undefined,
+    b: number[] | undefined,
+    c: number[] | undefined,
     n: number,
   ) => {
     if (n == 0 || cancel.current) return;
 
     await recursiveSolve(a, c, b, n - 1);
 
-    if (!cancel.current) {
+    if (
+      !cancel.current &&
+      a !== undefined &&
+      b !== undefined &&
+      c !== undefined
+    ) {
       for (let i = a.length - 2; i >= 0; i--) {
         if (a[i] != 0) {
           for (let j = 0; j < b.length - 1; j++) {
             if (b[j] == 0) {
-              b[j] = a[i];
+              b[j] = a[i] ?? 0;
               a[i] = 0;
 
               if (!cancel.current) {
@@ -127,9 +132,9 @@ export default function Home() {
           Towers of <span className="text-[hsl(280,100%,70%)]">Hanoi</span>
         </h1>
         <div className={grid}>
-          <Pillar id={1} disks={stackA} />
-          <Pillar id={2} disks={stackB} />
-          <Pillar id={3} disks={stackC} />
+          <Pillar disks={stackA} />
+          <Pillar disks={stackB} />
+          <Pillar disks={stackC} />
         </div>
         <button
           className="my-2 rounded-lg bg-gray-300 px-2"
