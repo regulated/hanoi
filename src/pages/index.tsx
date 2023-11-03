@@ -165,7 +165,7 @@ export default function Home() {
           >
             Reset
           </button>
-          <h2 className="text-xl font-bold text-gray-200">Disks:</h2>
+          <label className="text-xl text-gray-200">Disks:</label>
           <input
             className={input}
             type="number"
