@@ -9,9 +9,9 @@ import Pillar from "../components/pillar";
 
 export default function Home() {
   // number of disks used
-  const size: number = 7;
+  const size = 7;
 
-  let cancel = useRef(false);
+  const cancel = useRef(false);
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
@@ -28,16 +28,16 @@ export default function Home() {
     tempC = [...tempC, 0];
   }
 
-  // load initial disks at start
-  useEffect(() => {
-    reset();
-  }, []);
-
   const reset = () => {
     setStackA(tempA);
     setStackB(tempB);
     setStackC(tempC);
   };
+
+  // load initial disks at start
+  useEffect(() => {
+    reset();
+  }, []);
 
   const handleSolve = async () => {
     await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
