@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import {
   appContainer,
   title,
@@ -9,7 +9,15 @@ import Pillar from "../components/pillar";
 
 export default function Home() {
   // number of disks used
-  const size = 7;
+  //const size = useRef(7);
+
+  const [size, setSize] = useState<number>(7);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSize(Number(e.target.value));
+    cancel.current = true;
+    reset();
+  };
 
   const cancel = useRef(false);
 
@@ -129,7 +137,8 @@ export default function Home() {
       </Head>
       <main className={appContainer}>
         <h1 className={title}>
-          Towers of <span className="text-[hsl(280,100%,70%)]">Hanoi</span>
+          Towers of <span className="text-purple-600">Hanoi</span>
+          {/*"text-[hsl(280,100%,70%)]"*/}
         </h1>
         <div className={grid}>
           <Pillar disks={stackA} />
@@ -154,6 +163,7 @@ export default function Home() {
         >
           Reset
         </button>
+        <input type="number" onChange={handleChange} value={size} />
       </main>
     </>
   );
