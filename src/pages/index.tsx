@@ -38,6 +38,10 @@ export default function Home() {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) < 0 || Number(e.target.value) > 7) {
+      alert("Incorrect number entered. Enter a number between 0 and 7");
+      return;
+    }
     setSize(Number(e.target.value));
     cancel.current = true;
     reset();
@@ -170,6 +174,8 @@ export default function Home() {
           <input
             className={input}
             type="number"
+            min="0"
+            max="7"
             onChange={handleChange}
             value={size}
           />
