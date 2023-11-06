@@ -6,4 +6,4 @@ export const title =
 export const purple = "text-purple-300";
 export const body = "text-2xl text-gray-700";
 export const grid = "grid gap-12 pt-3 mt-3 text-center md:grid-cols-3 lg:w-2/3";
-export const input = "form-input w-24 p-2 m-0 rounded-xl";
+export const input = "form-input w-24 py-0 px-4 m-0 rounded-xl bg-gray-200";

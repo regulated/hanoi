@@ -43,7 +43,7 @@ export default function Home() {
     reset();
   };
 
-  // load initial disks at start
+  // load initial disks at start and reset when size is changed
   useEffect(() => {
     reset();
   }, [size]);
@@ -139,7 +139,6 @@ export default function Home() {
       <main className={appContainer}>
         <h1 className={title}>
           Towers of <span className="text-purple-600">Hanoi</span>
-          {/*"text-[hsl(280,100%,70%)]"*/}
         </h1>
         <div className={grid}>
           <Pillar disks={stackA} />
