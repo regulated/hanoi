@@ -4,7 +4,8 @@ import {
   appContainer,
   title,
   input,
-  /* purple, body,*/ grid,
+  grid,
+	buttons,
 } from "../styles/home-styles";
 import Pillar from "../components/pillar";
 
@@ -149,7 +150,7 @@ export default function Home() {
           <Pillar disks={stackB} />
           <Pillar disks={stackC} />
         </div>
-        <div className="align-center grid grid-cols-2 grid-rows-2 justify-center gap-6">
+        <div className={buttons}>
           <button
             className="my-2 rounded-lg bg-gray-300 px-2"
             onClick={() => {
