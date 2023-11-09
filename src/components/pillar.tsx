@@ -9,8 +9,6 @@ const Pillar = ({ disks }: PillarProps) => {
   return (
     <>
       <div className={rectangle}>
-        <Disk did={disks[9]} />
-        <Disk did={disks[8]} />
         <Disk did={disks[7]} />
         <Disk did={disks[6]} />
         <Disk did={disks[5]} />

@@ -34,12 +34,6 @@ const Disk = ({ did }: DiskProps) => {
             return <div className={indigoOval}></div>;
           case 7:
             return <div className={purpleOval}></div>;
-          case 8:
-            return <div className={purpleOval}></div>;
-          case 9:
-            return <div className={purpleOval}></div>;
-          case 10:
-            return <div className={purpleOval}></div>;
           default:
             return <div className={blankOval}></div>;
         }
