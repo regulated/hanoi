@@ -21,3 +21,5 @@ Extra Tasks:
 More disks?
 Diff disks used for less disks ex 3 disks use more even
 option to change speed
+
+Speed option radio button
