@@ -20,7 +20,7 @@ export default function Home() {
   const cancel = useRef(false);
 
   const speed = useRef(200);
-  // const [checkedRadio, setCheckedRadio] = useState<number>(0);
+  const [checked, setChecked] = useState<number>(1);
 
   const [stackA, setStackA] = useState<number[]>([]);
   const [stackB, setStackB] = useState<number[]>([]);
@@ -54,16 +54,16 @@ export default function Home() {
   };
 
   const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // setCheckedRadio(Number(e.target.value));
+    setChecked(Number(e.target.value));
     switch (Number(e.target.value)) {
       case 0:
-        speed.current = 200;
+        speed.current = 500;
         break;
       case 1:
-        speed.current = 400;
+        speed.current = 200;
         break;
       case 2:
-        speed.current = 600;
+        speed.current = 10;
         break;
     }
   };
