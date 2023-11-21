@@ -210,6 +210,7 @@ export default function Home() {
               className={radio}
               onChange={handleRadioChange}
               value={0}
+              checked={checked === 0}
             ></input>
           </div>
           <div>
@@ -220,6 +221,7 @@ export default function Home() {
               className={radio}
               onChange={handleRadioChange}
               value={1}
+              checked={checked === 1}
             ></input>
           </div>
           <div>
@@ -230,6 +232,7 @@ export default function Home() {
               className={radio}
               onChange={handleRadioChange}
               value={2}
+              checked={checked === 2}
             ></input>
           </div>
         </form>

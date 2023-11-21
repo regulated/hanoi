@@ -2,7 +2,7 @@
 export const appContainer =
   "container bg-zinc-800 flex flex-col items-center justify-center min-h-screen min-w-full";
 export const title =
-  "text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-400 sm:mb-12 mb-2 ";
+  "text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-400 sm:mb-12 mb-2 px-4";
 export const purple = "text-purple-300";
 export const body = "text-2xl text-gray-700";
 export const grid =
