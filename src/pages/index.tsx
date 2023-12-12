@@ -12,12 +12,10 @@ import {
 import Pillar from "../components/pillar";
 
 export default function Home() {
-  // number of disks used
-  //const size = useRef(7);
-
   const [size, setSize] = useState<number>(7);
 
   const cancel = useRef(false);
+  const solved = useRef(false);
 
   const speed = useRef(200);
   const [checked, setChecked] = useState<number>(1);
@@ -41,11 +39,12 @@ export default function Home() {
     setStackA(tempA);
     setStackB(tempB);
     setStackC(tempC);
+    solved.current = false;
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (Number(e.target.value) < 0 || Number(e.target.value) > 7) {
-      alert("Incorrect number entered. Enter a number between 0 and 7");
+      alert("Incorrect input. Enter a number between 0 and 7");
       return;
     }
     setSize(Number(e.target.value));
@@ -74,7 +73,17 @@ export default function Home() {
   }, [size]);
 
   const handleSolve = async () => {
-    await recursiveSolve([...stackA, 1], [...stackC, 3], [...stackB, 2], size);
+    await recursiveSolve(
+      [...stackA, 1],
+      [...stackC, 3],
+      [...stackB, 2],
+      size,
+    ).then(async () => {
+      if (!cancel.current) {
+        solved.current = true;
+        //alert("Solved!");
+      }
+    });
   };
 
   const delay = async (ms: number) => {
@@ -89,7 +98,8 @@ export default function Home() {
     c: number[] | undefined,
     n: number,
   ) => {
-    if (n == 0 || cancel.current) return;
+    // check for base case or reset button or solved already
+    if (n == 0 || cancel.current || solved.current) return;
 
     await recursiveSolve(a, c, b, n - 1);
 
