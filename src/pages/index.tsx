@@ -78,7 +78,7 @@ export default function Home() {
       [...stackC, 3],
       [...stackB, 2],
       size,
-    ).then(async () => {
+    ).then(() => {
       if (!cancel.current) {
         solved.current = true;
         //alert("Solved!");
